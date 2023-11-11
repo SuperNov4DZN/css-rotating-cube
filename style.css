@@ -1,0 +1,121 @@
+/* set css variables --------> */
+:root {
+    --rotationx: 20deg;
+    --rotationy: 20deg;
+
+    --xsize: 37vh;
+    --ysize: 44vw;
+
+    --vertr: calc(var(--ysize) / 2);
+    --vertl: calc((var(--ysize) / 2) * -1);
+
+    --horzt: calc(var(--xsize) / 2);
+    --horzb: calc((var(--xsize) / 2) * -1);
+
+    --proff: calc(var(--xsize) / 2);
+    --profb: calc((var(--xsize) / 2) * -1);
+}
+/* <-------------------------- */
+
+/* create main container ----> */
+.container {
+    position: absolute;
+
+    height: var(--xsize);
+    width: var(--ysize);
+
+    top: 50%;
+    right: 50%;
+
+    transform: translate(50%, -50%);
+}
+/* <-------------------------- */
+
+/* set perspective box ------> */
+.perspective-box-closer {
+    animation-duration: 60s;
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+
+    /* transform: perspective(5.7cm) rotateX(16deg) rotateY(0deg); */
+    /* transform: rotateX(var(--rotationx)) rotateY(var(--rotationy)); */
+}
+/* <-------------------------- */
+
+/* create face & set size ---> */
+.face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    line-height: 100px;
+    font-size: 100px;
+
+    opacity: 0.5;
+}
+
+.face.left, .face.right {
+    height: var(--xsize);
+    width: var(--xsize);
+}
+
+.face.front, .face.top,
+.face.back, .face.bottom {
+    height: var(--xsize);
+    width: var(--ysize);
+}
+/* <-------------------------- */
+
+/* alignment & color --------> */
+.left {
+    background-color: pink;
+    transform: rotateY(90deg) rotateZ(180deg) translate3d(0,0,var(--vertl));
+}
+
+.right {
+    background-color: brown;
+    transform: rotateY(90deg) translate3d(0,0,var(--vertr));
+}
+
+.top {
+    background-color: skyblue;
+    transform: rotateX(90deg) translate3d(0, 0, var(--horzt));
+}
+
+.bottom {
+    background-color: blueviolet;
+    transform: rotateX(90deg) translate3d(0, 0, var(--horzb));
+}
+
+.front {
+    background-color: limegreen;
+    transform: translate3d(0, 0, var(--proff));
+}
+
+.back {
+    background-color: yellow;
+    transform: translate3d(0, 0, var(--profb));
+}
+/* <-------------------------- */
+
+
+
+@keyframes rotate {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
